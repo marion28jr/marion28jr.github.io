@@ -38,7 +38,7 @@ const QuestionForm: FunctionComponent<QuestionFormProps> = (
     <div>
       <p dangerouslySetInnerHTML={{ __html: question.question }} />
       <div>
-        {answers.map((answer: string, index) => (
+        {answers.map((answer: string, index: number) => (
           <button className={`btn ${ question.choice_answer === answer ? "btn-success" : "btn-outline-success"}`} key={index} onClick={() => handleChoiceAnswers(question.question,answer)}>{answer}</button>
         ))}
       </div>

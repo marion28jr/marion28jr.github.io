@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Question } from "../../../datas/question";
 import QuestionForm from "../../forms/QuestionForm";
 import SearchForm from "../../forms/SearchForm";
 import { QuestionsContext } from "../../hook/QuestionsContext/QuestionsContext";
+import { Link } from "react-router-dom";
 
 const PageQuiz = () => {
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const { questions } = useContext(QuestionsContext);
   const [showSubmitButton, setShowSubmitButton] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,13 +21,12 @@ const PageQuiz = () => {
   return (
     <div className="container">
       <h1>Quiz maker</h1>
-      <QuestionsContext.Provider value={{ questions, setQuestions }}>
         <SearchForm />
-        {questions.map((question: Question, index) => (
+        {questions.map((question: Question, index: number) => (
           <QuestionForm key={index} question={question} />
         ))}
-      </QuestionsContext.Provider>
-      {showSubmitButton && <button>Save</button>}
+      
+      {showSubmitButton && <Link className="btn btn-primary" to="/resultat">Save</Link>}
     </div>
   );
 };
