@@ -2,17 +2,21 @@ import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
 import { Category } from "../../datas/category";
 
 interface SearchFormProps {
-  currentCategory?: Category;
+  currentIdCategory?: string;
   currentLevel?: string;
-  setCurrentCategory: (currentCategory?: Category) => void;
+  setCurrentIdCategory: (currentIdCategory?: string) => void;
   setCurrentLevel: (currentLevel?: string) => void;
 }
 
 const SearchForm: FunctionComponent<SearchFormProps> = (
   props: SearchFormProps
 ) => {
-  const { currentCategory, currentLevel, setCurrentCategory, setCurrentLevel } =
-    props;
+  const {
+    currentIdCategory,
+    currentLevel,
+    setCurrentIdCategory,
+    setCurrentLevel,
+  } = props;
 
   const [categories, setCategories] = useState<Category[]>([]);
   const levels = ["easy", "medium", "hard"];
@@ -24,24 +28,20 @@ const SearchForm: FunctionComponent<SearchFormProps> = (
   }, []);
 
   const onChangeCategory = (event: ChangeEvent<HTMLSelectElement>) => {
-    setCurrentCategory(
-      categories.find(
-        (category: Category) => category.id.toString() === event.target.value
-      )
-    );
+    setCurrentIdCategory(event.target.value);
   };
 
   const onChangeLevel = (event: ChangeEvent<HTMLSelectElement>) => {
     setCurrentLevel(event.target.value);
   };
 
-  const handleSubmit = () => {}
+  const handleSubmit = () => {};
 
   return (
     <form onSubmit={handleSubmit}>
       <select
         id="categorySelect"
-        value={currentCategory?.id ?? "default"}
+        value={currentIdCategory ?? "default"}
         onChange={onChangeCategory}
       >
         <option value="default" disabled hidden>
