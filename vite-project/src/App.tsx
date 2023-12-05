@@ -1,7 +1,9 @@
+import PageQuiz from "./feature/pages/PageQuiz/PageQuiz";
+
 function App() {
   return (
-    <div className="container">
-      <h1>App</h1>
+    <div>
+      <PageQuiz />
     </div>
   );
 }
