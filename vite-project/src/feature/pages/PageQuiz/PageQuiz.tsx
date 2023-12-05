@@ -1,39 +1,12 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Question } from "../../../datas/question";
-import { handleFetchResponse } from "../../../utils/fetch";
 import QuestionForm from "../../forms/QuestionForm";
 import SearchForm from "../../forms/SearchForm";
+import { QuestionsContext } from "../../hook/QuestionsContext/QuestionsContext";
 
 const PageQuiz = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [showSubmitButton, setShowSubmitButton] = useState<boolean>(false);
-
-  const handleSubmitSearch = (
-    event: MouseEvent<HTMLButtonElement>,
-    currentIdCategory?: string,
-    currentLevel?: string
-  ) => {
-    event.preventDefault();
-    fetch(
-      `https://opentdb.com/api.php?amount=5&category=${currentIdCategory}&difficulty=${currentLevel}&type=multiple`
-    )
-      .then(handleFetchResponse)
-      .then((data) => setQuestions(data.results))
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleChoiceAnswers = (question: string, answers: string) => {
-    let list = [...questions];
-    const selectedQuestion = list.find(
-      (q: Question) => q.question === question
-    );
-    if (selectedQuestion) {
-      selectedQuestion.choice_answer = answers;
-      setQuestions(list);
-    }
-  };
 
   useEffect(() => {
     const numberAnswer = questions.reduce(
@@ -47,17 +20,13 @@ const PageQuiz = () => {
   return (
     <div className="container">
       <h1>Quiz maker</h1>
-      <SearchForm handleSubmit={handleSubmitSearch} />
-      {questions.map((question: Question, index) => (
-        <QuestionForm
-          key={index}
-          question={question}
-          handleChoiceAnswers={handleChoiceAnswers}
-        />
-      ))}
-      {
-        showSubmitButton && <button>Save</button>
-      }
+      <QuestionsContext.Provider value={{ questions, setQuestions }}>
+        <SearchForm />
+        {questions.map((question: Question, index) => (
+          <QuestionForm key={index} question={question} />
+        ))}
+      </QuestionsContext.Provider>
+      {showSubmitButton && <button>Save</button>}
     </div>
   );
 };

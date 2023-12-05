@@ -1,15 +1,16 @@
-import { FunctionComponent, useMemo } from "react";
+import { FunctionComponent, useContext, useMemo } from "react";
 import { Question } from "../../datas/question";
+import { QuestionsContext } from "../hook/QuestionsContext/QuestionsContext";
 
 interface QuestionFormProps {
   question: Question;
-  handleChoiceAnswers: (question: string, answers: string) => void;
 }
 
 const QuestionForm: FunctionComponent<QuestionFormProps> = (
   props: QuestionFormProps
 ) => {
-  const { question, handleChoiceAnswers } = props;
+  const { question } = props;
+  const { questions ,setQuestions } = useContext(QuestionsContext);
 
   const sortAnswers = (incorrectAnswers: string[], correctAnswer: string) => {
     const list = [...incorrectAnswers, correctAnswer];
@@ -21,6 +22,17 @@ const QuestionForm: FunctionComponent<QuestionFormProps> = (
     () => sortAnswers(question.incorrect_answers, question.correct_answer),
     [question]
   );
+
+  const handleChoiceAnswers = (question: string, answers: string) => {
+    let list = [...questions];
+    const selectedQuestion = list.find(
+      (q: Question) => q.question === question
+    );
+    if (selectedQuestion) {
+      selectedQuestion.choice_answer = answers;
+      setQuestions(list);
+    }
+  };
 
   return (
     <div>

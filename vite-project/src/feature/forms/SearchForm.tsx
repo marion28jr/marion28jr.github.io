@@ -2,24 +2,16 @@ import {
   ChangeEvent,
   FunctionComponent,
   MouseEvent,
+  useContext,
   useEffect,
   useState,
 } from "react";
 import { Category } from "../../datas/category";
+import { handleFetchResponse } from "../../utils/fetch";
+import { QuestionsContext } from "../hook/QuestionsContext/QuestionsContext";
 
-interface SearchFormProps {
-  handleSubmit: (
-    event: MouseEvent<HTMLButtonElement>,
-    currentIdCategory?: string,
-    currentLevel?: string
-  ) => void;
-}
-
-const SearchForm: FunctionComponent<SearchFormProps> = (
-  props: SearchFormProps
-) => {
-  const { handleSubmit } = props;
-
+const SearchForm: FunctionComponent = () => {
+  const { setQuestions } = useContext(QuestionsContext);
   const [categories, setCategories] = useState<Category[]>([]);
   const levels = ["easy", "medium", "hard"];
   const [currentIdCategory, setCurrentIdCategory] = useState<string>();
@@ -37,6 +29,22 @@ const SearchForm: FunctionComponent<SearchFormProps> = (
 
   const onChangeLevel = (event: ChangeEvent<HTMLSelectElement>) => {
     setCurrentLevel(event.target.value);
+  };
+
+  const handleSubmit = (
+    event: MouseEvent<HTMLButtonElement>,
+    currentIdCategory?: string,
+    currentLevel?: string
+  ) => {
+    event.preventDefault();
+    fetch(
+      `https://opentdb.com/api.php?amount=5&category=${currentIdCategory}&difficulty=${currentLevel}&type=multiple`
+    )
+      .then(handleFetchResponse)
+      .then((data) => setQuestions(data.results))
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
