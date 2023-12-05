@@ -3,12 +3,13 @@ import { Question } from "../../datas/question";
 
 interface QuestionFormProps {
   question: Question;
+  handleChoiceQuestion: (question: string, answers: string) => void;
 }
 
 const QuestionForm: FunctionComponent<QuestionFormProps> = (
   props: QuestionFormProps
 ) => {
-  const { question } = props;
+  const { question, handleChoiceQuestion } = props;
 
   const sortAnswers = (incorrectAnswers: string[], correctAnswer: string) => {
     const list = [...incorrectAnswers, correctAnswer];
@@ -26,7 +27,7 @@ const QuestionForm: FunctionComponent<QuestionFormProps> = (
       <p dangerouslySetInnerHTML={{ __html: question.question }} />
       <div>
         {answers.map((answer: string, index) => (
-          <button key={index}>{answer}</button>
+          <button className={`btn ${ question.choice_answer === answer ? "btn-success" : "btn-outline-success"}`} key={index} onClick={() => handleChoiceQuestion(question.question,answer)}>{answer}</button>
         ))}
       </div>
     </div>
