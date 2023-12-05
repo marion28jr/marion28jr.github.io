@@ -1,25 +1,29 @@
-import { ChangeEvent, FunctionComponent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  FunctionComponent,
+  MouseEvent,
+  useEffect,
+  useState,
+} from "react";
 import { Category } from "../../datas/category";
 
 interface SearchFormProps {
-  currentIdCategory?: string;
-  currentLevel?: string;
-  setCurrentIdCategory: (currentIdCategory?: string) => void;
-  setCurrentLevel: (currentLevel?: string) => void;
+  handleSubmit: (
+    event: MouseEvent<HTMLButtonElement>,
+    currentIdCategory?: string,
+    currentLevel?: string
+  ) => void;
 }
 
 const SearchForm: FunctionComponent<SearchFormProps> = (
   props: SearchFormProps
 ) => {
-  const {
-    currentIdCategory,
-    currentLevel,
-    setCurrentIdCategory,
-    setCurrentLevel,
-  } = props;
+  const { handleSubmit } = props;
 
   const [categories, setCategories] = useState<Category[]>([]);
   const levels = ["easy", "medium", "hard"];
+  const [currentIdCategory, setCurrentIdCategory] = useState<string>();
+  const [currentLevel, setCurrentLevel] = useState<string>();
 
   useEffect(() => {
     fetch("https://opentdb.com/api_category.php")
@@ -35,10 +39,8 @@ const SearchForm: FunctionComponent<SearchFormProps> = (
     setCurrentLevel(event.target.value);
   };
 
-  const handleSubmit = () => {};
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <select
         id="categorySelect"
         value={currentIdCategory ?? "default"}
@@ -67,7 +69,14 @@ const SearchForm: FunctionComponent<SearchFormProps> = (
           </option>
         ))}
       </select>
-      <input id="createBtn" type="submit" value="Create" />
+      <button
+        id="createBtn"
+        onClick={(event) =>
+          handleSubmit(event, currentIdCategory, currentLevel)
+        }
+      >
+        Create
+      </button>
     </form>
   );
 };
