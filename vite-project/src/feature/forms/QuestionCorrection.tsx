@@ -10,7 +10,7 @@ const QuestionCorrection: FunctionComponent<QuestionCorrectionProps> = (
 ) => {
   const { question } = props;
 
-  const getcClassNameButton = (answer: string): string => {
+  const getClassNameButton = (answer: string): string => {
     if (answer === question.correct_answer) {
       return "btn-success";
     } else if (question.choice_answer === answer) {
@@ -24,7 +24,7 @@ const QuestionCorrection: FunctionComponent<QuestionCorrectionProps> = (
       <p dangerouslySetInnerHTML={{ __html: question.wording }} />
       <div>
         {question.answers.map((answer: string, index: number) => (
-          <button className={`btn ${getcClassNameButton(answer)}`} key={index}>
+          <button className={`btn ${getClassNameButton(answer)}`} key={index}>
             {answer}
           </button>
         ))}
