@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from "react";
-import { Question } from "../../datas/question";
+import { Question } from "../../utils/datas";
 
 interface QuestionCorrectionProps {
   question: Question;

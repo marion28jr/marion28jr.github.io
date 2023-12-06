@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { Question } from "../../../datas/question";
 import QuestionForm from "../../forms/QuestionForm";
 import SearchForm from "../../forms/SearchForm";
-import { QuestionsContext } from "../../hook/QuestionsContext/QuestionsContext";
+import { QuestionsContext } from "../../../utils/context";
 import { Link } from "react-router-dom";
+import { Question } from "../../../utils/datas";
 
 const PageQuiz = () => {
   const { questions } = useContext(QuestionsContext);

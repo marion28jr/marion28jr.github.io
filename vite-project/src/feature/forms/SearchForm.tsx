@@ -6,9 +6,9 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Category } from "../../datas/category";
 import { handleFetchResponse } from "../../utils/fetch";
-import { QuestionsContext } from "../hook/QuestionsContext/QuestionsContext";
+import { QuestionsContext } from "../../utils/context";
+import { Category } from "../../utils/datas";
 
 const SearchForm: FunctionComponent = () => {
   const { setQuestions } = useContext(QuestionsContext);

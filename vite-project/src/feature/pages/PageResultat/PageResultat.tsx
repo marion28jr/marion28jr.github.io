@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { Question } from "../../../datas/question";
 import QuestionCorrection from "../../forms/QuestionCorrection";
-import { QuestionsContext } from "../../hook/QuestionsContext/QuestionsContext";
+import { QuestionsContext } from "../../../utils/context";
+import { Question } from "../../../utils/datas";
 
 const PageResultat = () => {
   const { questions } = useContext(QuestionsContext);

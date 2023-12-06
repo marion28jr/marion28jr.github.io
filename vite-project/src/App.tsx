@@ -2,8 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageQuiz from "./feature/pages/PageQuiz/PageQuiz";
 import PageResultat from "./feature/pages/PageResultat/PageResultat";
 import { useState } from "react";
-import { Question } from "./datas/question";
-import { QuestionsContext } from "./feature/hook/QuestionsContext/QuestionsContext";
+import { QuestionsContext } from "./utils/context";
+import { Question } from "./utils/datas";
 
 function App() {
   const [questions, setQuestions] = useState<Question[]>([]);

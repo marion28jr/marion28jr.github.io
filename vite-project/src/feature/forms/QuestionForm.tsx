@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext, useMemo } from "react";
-import { Question } from "../../datas/question";
-import { QuestionsContext } from "../hook/QuestionsContext/QuestionsContext";
+import { QuestionsContext } from "../../utils/context";
+import { Question } from "../../utils/datas";
 
 interface QuestionFormProps {
   question: Question;
