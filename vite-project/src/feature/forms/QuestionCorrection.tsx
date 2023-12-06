@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo } from "react";
+import { FunctionComponent } from "react";
 import { Question } from "../../utils/datas";
 
 interface QuestionCorrectionProps {
@@ -10,14 +10,8 @@ const QuestionCorrection: FunctionComponent<QuestionCorrectionProps> = (
 ) => {
   const { question } = props;
 
-  const answers = useMemo(
-    () => [...question.incorrect_answers, question.correct_answer],
-    [question]
-  );
-  const getcClassNameButton = (answer: string) => {
-    if (
-      answer === question.correct_answer
-    ) {
+  const getcClassNameButton = (answer: string): string => {
+    if (answer === question.correct_answer) {
       return "btn-success";
     } else if (question.choice_answer === answer) {
       return "btn-danger";
@@ -27,9 +21,9 @@ const QuestionCorrection: FunctionComponent<QuestionCorrectionProps> = (
 
   return (
     <div>
-      <p dangerouslySetInnerHTML={{ __html: question.question }} />
+      <p dangerouslySetInnerHTML={{ __html: question.wording }} />
       <div>
-        {answers.map((answer: string, index) => (
+        {question.answers.map((answer: string, index: number) => (
           <button className={`btn ${getcClassNameButton(answer)}`} key={index}>
             {answer}
           </button>

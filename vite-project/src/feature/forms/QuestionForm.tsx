@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useMemo } from "react";
+import { FunctionComponent, useContext } from "react";
 import { QuestionsContext } from "../../utils/context";
 import { Question } from "../../utils/datas";
 
@@ -10,24 +10,11 @@ const QuestionForm: FunctionComponent<QuestionFormProps> = (
   props: QuestionFormProps
 ) => {
   const { question } = props;
-  const { questions ,setQuestions } = useContext(QuestionsContext);
+  const { questions, setQuestions } = useContext(QuestionsContext);
 
-  const sortAnswers = (incorrectAnswers: string[], correctAnswer: string) => {
-    const list = [...incorrectAnswers, correctAnswer];
-    list.sort(() => 0.5 - Math.random());
-    return list;
-  };
-
-  const answers = useMemo(
-    () => sortAnswers(question.incorrect_answers, question.correct_answer),
-    [question]
-  );
-
-  const handleChoiceAnswers = (question: string, answers: string) => {
+  const handleChoiceAnswers = (idQuestion: number, answers: string): void => {
     let list = [...questions];
-    const selectedQuestion = list.find(
-      (q: Question) => q.question === question
-    );
+    const selectedQuestion = list.find((q: Question) => q.id === idQuestion);
     if (selectedQuestion) {
       selectedQuestion.choice_answer = answers;
       setQuestions(list);
@@ -36,10 +23,20 @@ const QuestionForm: FunctionComponent<QuestionFormProps> = (
 
   return (
     <div>
-      <p dangerouslySetInnerHTML={{ __html: question.question }} />
+      <p dangerouslySetInnerHTML={{ __html: question.wording }} />
       <div>
-        {answers.map((answer: string, index: number) => (
-          <button className={`btn ${ question.choice_answer === answer ? "btn-success" : "btn-outline-success"}`} key={index} onClick={() => handleChoiceAnswers(question.question,answer)}>{answer}</button>
+        {question.answers.map((answer: string, index: number) => (
+          <button
+            className={`btn ${
+              question.choice_answer === answer
+                ? "btn-success"
+                : "btn-outline-success"
+            }`}
+            key={index}
+            onClick={() => handleChoiceAnswers(question.id, answer)}
+          >
+            {answer}
+          </button>
         ))}
       </div>
     </div>

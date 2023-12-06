@@ -6,9 +6,9 @@ import {
   useEffect,
   useState,
 } from "react";
-import { handleFetchResponse } from "../../utils/fetch";
 import { QuestionsContext } from "../../utils/context";
-import { Category } from "../../utils/datas";
+import { Category, QuestionQuery, convertToQuestions } from "../../utils/datas";
+import { handleFetchResponse } from "../../utils/fetch";
 
 const SearchForm: FunctionComponent = () => {
   const { setQuestions } = useContext(QuestionsContext);
@@ -23,11 +23,11 @@ const SearchForm: FunctionComponent = () => {
       .then((data) => setCategories(data.trivia_categories));
   }, []);
 
-  const onChangeCategory = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onChangeCategory = (event: ChangeEvent<HTMLSelectElement>): void => {
     setCurrentIdCategory(event.target.value);
   };
 
-  const onChangeLevel = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onChangeLevel = (event: ChangeEvent<HTMLSelectElement>): void => {
     setCurrentLevel(event.target.value);
   };
 
@@ -35,13 +35,16 @@ const SearchForm: FunctionComponent = () => {
     event: MouseEvent<HTMLButtonElement>,
     currentIdCategory?: string,
     currentLevel?: string
-  ) => {
+  ): void => {
     event.preventDefault();
     fetch(
       `https://opentdb.com/api.php?amount=5&category=${currentIdCategory}&difficulty=${currentLevel}&type=multiple`
     )
       .then(handleFetchResponse)
-      .then((data) => setQuestions(data.results))
+      .then((data) => {
+        const questions: QuestionQuery[] = data.results;
+        setQuestions(convertToQuestions(questions));
+      })
       .catch((error) => {
         console.log(error);
       });

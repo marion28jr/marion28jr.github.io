@@ -21,8 +21,8 @@ const PageResultat = () => {
   return (
     <div className="container">
       <h1>Résultats</h1>
-      {questions.map((question: Question, index: number) => (
-        <QuestionCorrection key={index} question={question} />
+      {questions.map((question: Question) => (
+        <QuestionCorrection key={question.id} question={question} />
       ))}
       <p>
         You scored {score} out of {questions.length}{" "}

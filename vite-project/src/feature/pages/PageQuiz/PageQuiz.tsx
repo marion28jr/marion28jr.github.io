@@ -22,8 +22,8 @@ const PageQuiz = () => {
     <div className="container">
       <h1>Quiz maker</h1>
         <SearchForm />
-        {questions.map((question: Question, index: number) => (
-          <QuestionForm key={index} question={question} />
+        {questions.map((question: Question) => (
+          <QuestionForm key={question.id} question={question} />
         ))}
       
       {showSubmitButton && <Link className="btn btn-primary" to="/resultat">Save</Link>}
