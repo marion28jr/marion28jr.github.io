@@ -12,13 +12,14 @@ const QuestionForm: FunctionComponent<QuestionFormProps> = (
   const { question } = props;
   const { questions, setQuestions } = useContext(QuestionsContext);
 
-  const handleChoiceAnswers = (idQuestion: number, answers: string): void => {
-    let list = [...questions];
-    const selectedQuestion = list.find((q: Question) => q.id === idQuestion);
-    if (selectedQuestion) {
-      selectedQuestion.choice_answer = answers;
-      setQuestions(list);
-    }
+  const handleChoiceAnswer = (idQuestion: number, answer: string): void => {
+    setQuestions(
+      questions.map((question: Question) => ({
+        ...question,
+        choice_answer:
+          question.id === idQuestion ? answer : question.choice_answer,
+      }))
+    );
   };
 
   return (
@@ -33,7 +34,7 @@ const QuestionForm: FunctionComponent<QuestionFormProps> = (
                 : "btn-outline-success"
             }`}
             key={index}
-            onClick={() => handleChoiceAnswers(question.id, answer)}
+            onClick={() => handleChoiceAnswer(question.id, answer)}
           >
             {answer}
           </button>

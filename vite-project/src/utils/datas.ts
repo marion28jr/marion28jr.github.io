@@ -20,6 +20,23 @@ export interface QuestionQuery {
   incorrect_answers: string[];
 }
 
+export const getNumberOfAnswers = (questions: Question[]): number => {
+  return questions.reduce(
+    (accumulator: number, question: Question) =>
+      accumulator + (question.choice_answer ? 1 : 0),
+    0
+  );
+};
+
+export const getNumberOfCorrectAnswers = (questions: Question[]): number => {
+  return questions.reduce(
+    (accumulator: number, question: Question) =>
+      accumulator +
+      (question.choice_answer === question.correct_answer ? 1 : 0),
+    0
+  );
+};
+
 const sortAnswers = (
   incorrectAnswers: string[],
   correctAnswer: string

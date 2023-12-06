@@ -1,20 +1,14 @@
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { QuestionsContext } from "../../../utils/context";
-import { Question } from "../../../utils/datas";
+import { Question, getNumberOfCorrectAnswers } from "../../../utils/datas";
 import QuestionCorrection from "../../forms/QuestionCorrection";
 
 const PageResultat = () => {
   const { questions, setQuestions } = useContext(QuestionsContext);
 
   const score = useMemo(
-    () =>
-      questions.reduce(
-        (accumulator: number, question: Question) =>
-          accumulator +
-          (question.choice_answer === question.correct_answer ? 1 : 0),
-        0
-      ),
+    () => getNumberOfCorrectAnswers(questions),
     [questions]
   );
 
