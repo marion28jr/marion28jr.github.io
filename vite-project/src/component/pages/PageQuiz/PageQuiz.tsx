@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { QuestionsContext, QuestionsContextType } from "../../../shared/utils/context";
 import SearchForm from "./SearchForm";
-import QuestionItem from "./QuestionForm";
+import QuestionItem from "./QuestionItem";
 import { NUMBER_OF_QUESTIONS, Question, getNumberOfAnswers } from "../../../shared/models/questions";
 
 const PageQuiz = () => {
