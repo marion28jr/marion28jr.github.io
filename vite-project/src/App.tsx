@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import PageQuiz from "./component/pages/PageQuiz/PageQuiz";
 import PageResultat from "./component/pages/PageResultat/PageResultat";
 import { QuestionsContext } from "./shared/utils/context";
@@ -16,6 +16,7 @@ function App() {
           <Routes>
             <Route path={PATH_HOME} element={<PageQuiz />}></Route>
             <Route path={PATH_RESULTAT} element={<PageResultat />}></Route>
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </HashRouter>
       </QuestionsContext.Provider>
