@@ -18,6 +18,9 @@ import {
 } from "../../../shared/utils/context";
 import { handleFetchResponse } from "../../../shared/utils/fetch";
 
+/**
+ * Composent qui permet d'afficher la recherche des questions
+ */
 const SearchForm: FunctionComponent = () => {
   const { setQuestions } = useContext<QuestionsContextType>(QuestionsContext);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -34,14 +37,26 @@ const SearchForm: FunctionComponent = () => {
       });
   }, []);
 
+  /**
+   * Permet de changer la catégorie choisie
+   * @param event Événement 
+   */
   const onChangeCategory = (event: ChangeEvent<HTMLSelectElement>): void => {
     setCurrentIdCategory(event.target.value);
   };
 
+  /**
+   * Permet de changer le niveau choisi
+   * @param event Événement 
+   */
   const onChangeLevel = (event: ChangeEvent<HTMLSelectElement>): void => {
     setCurrentLevel(event.target.value);
   };
 
+  /**
+   * Permet de récupérer 5 questions en fonction de la catégorie et du niveau choisis
+   * @param event Événement
+   */
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 

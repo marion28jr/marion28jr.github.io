@@ -5,11 +5,18 @@ interface AnswerItemProps {
   question: Question;
 }
 
+/**
+ * Composent qui permet d'afficher la correction d'une question avec son wording et ses réponses
+ */
 const AnswerItem: FunctionComponent<AnswerItemProps> = (
   props: AnswerItemProps
 ) => {
   const { question } = props;
 
+  /**
+   * Permet de définir la couleur d'une réponse
+   * @param answer réponse
+   */
   const getClassNameColorAnswer = (answer: string): string => {
     if (answer === question.correct_answer) {
       return "bg-success text-white";

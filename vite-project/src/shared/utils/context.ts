@@ -6,6 +6,9 @@ export interface QuestionsContextType {
   setQuestions: (questions: Question[]) => void;
 }
 
+/**
+ * Le context Question
+ */
 export const QuestionsContext = React.createContext<QuestionsContextType>({
   questions: [],
   setQuestions: () => {},
