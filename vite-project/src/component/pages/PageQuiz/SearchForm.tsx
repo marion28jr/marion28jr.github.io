@@ -1,14 +1,15 @@
 import {
   ChangeEvent,
+  FormEvent,
   FunctionComponent,
-  MouseEvent,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { QuestionsContext, QuestionsContextType } from "../../utils/context";
-import { Category, QuestionQuery, convertToQuestions } from "../../utils/datas";
-import { handleFetchResponse } from "../../utils/fetch";
+import { QuestionsContext, QuestionsContextType } from "../../../shared/utils/context";
+import { handleFetchResponse } from "../../../shared/utils/fetch";
+import { CategoriesQuery, Category } from "../../../shared/models/categories";
+import { NUMBER_OF_QUESTIONS, QuestionsQuery, convertToQuestions } from "../../../shared/models/questions";
 
 const SearchForm: FunctionComponent = () => {
   const { setQuestions } = useContext<QuestionsContextType>(QuestionsContext);
@@ -19,8 +20,11 @@ const SearchForm: FunctionComponent = () => {
 
   useEffect(() => {
     fetch("https://opentdb.com/api_category.php")
-      .then((res) => res.json())
-      .then((data) => setCategories(data.trivia_categories));
+      .then(handleFetchResponse)
+      .then((data: CategoriesQuery) => setCategories(data.trivia_categories))
+      .catch((error: Error) => {
+        console.log(error);
+      });
   }, []);
 
   const onChangeCategory = (event: ChangeEvent<HTMLSelectElement>): void => {
@@ -31,27 +35,28 @@ const SearchForm: FunctionComponent = () => {
     setCurrentLevel(event.target.value);
   };
 
-  const handleSubmit = (
-    event: MouseEvent<HTMLButtonElement>,
-    currentIdCategory?: string,
-    currentLevel?: string
-  ): void => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    
+    const categoryQuery = currentIdCategory
+      ? `&category=${currentIdCategory}`
+      : "";
+    const levelQuery = currentLevel ? `&difficulty=${currentLevel}` : "";
+
     fetch(
-      `https://opentdb.com/api.php?amount=5&category=${currentIdCategory}&difficulty=${currentLevel}&type=multiple`
+      `https://opentdb.com/api.php?amount=${NUMBER_OF_QUESTIONS}${categoryQuery}${levelQuery}&type=multiple`
     )
       .then(handleFetchResponse)
-      .then((data) => {
-        const questions: QuestionQuery[] = data.results;
-        setQuestions(convertToQuestions(questions));
+      .then((data: QuestionsQuery) => {
+        setQuestions(convertToQuestions(data.results));
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.log(error);
       });
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <select
         id="categorySelect"
         value={currentIdCategory ?? "default"}
@@ -80,12 +85,7 @@ const SearchForm: FunctionComponent = () => {
           </option>
         ))}
       </select>
-      <button
-        id="createBtn"
-        onClick={(event) =>
-          handleSubmit(event, currentIdCategory, currentLevel)
-        }
-      >
+      <button id="createBtn" type="submit">
         Create
       </button>
     </form>

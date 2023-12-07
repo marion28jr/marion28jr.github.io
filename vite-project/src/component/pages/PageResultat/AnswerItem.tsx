@@ -1,12 +1,12 @@
 import { FunctionComponent } from "react";
-import { Question } from "../../utils/datas";
+import { Question } from "../../../shared/models/questions";
 
-interface QuestionCorrectionProps {
+interface AnswerItemProps {
   question: Question;
 }
 
-const QuestionCorrection: FunctionComponent<QuestionCorrectionProps> = (
-  props: QuestionCorrectionProps
+const AnswerItem: FunctionComponent<AnswerItemProps> = (
+  props: AnswerItemProps
 ) => {
   const { question } = props;
 
@@ -33,4 +33,4 @@ const QuestionCorrection: FunctionComponent<QuestionCorrectionProps> = (
   );
 };
 
-export default QuestionCorrection;
+export default AnswerItem;

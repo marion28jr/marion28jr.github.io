@@ -1,15 +1,15 @@
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { QuestionsContext, QuestionsContextType } from "../../../utils/context";
-import { Question, getNumberOfAnswers } from "../../../utils/datas";
-import QuestionForm from "../../forms/QuestionForm";
-import SearchForm from "../../forms/SearchForm";
+import { QuestionsContext, QuestionsContextType } from "../../../shared/utils/context";
+import SearchForm from "./SearchForm";
+import QuestionItem from "./QuestionItem";
+import { NUMBER_OF_QUESTIONS, Question, getNumberOfAnswers } from "../../../shared/models/questions";
 
 const PageQuiz = () => {
   const { questions } = useContext<QuestionsContextType>(QuestionsContext);
 
   const showSubmitButton: boolean = useMemo<boolean>(
-    () => getNumberOfAnswers(questions) === 5,
+    () => getNumberOfAnswers(questions) === NUMBER_OF_QUESTIONS,
     [questions]
   );
 
@@ -18,7 +18,7 @@ const PageQuiz = () => {
       <h1>Quiz maker</h1>
       <SearchForm />
       {questions.map((question: Question) => (
-        <QuestionForm key={question.id} question={question} />
+        <QuestionItem key={question.id} question={question} />
       ))}
       {showSubmitButton && (
         <Link className="btn btn-primary" to="/resultat">

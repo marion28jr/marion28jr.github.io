@@ -1,6 +1,14 @@
-export interface Category {
-  id: number;
-  name: string;
+interface QuestionQuery {
+  type: string;
+  difficulty: string;
+  category: string;
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
+}
+
+export interface QuestionsQuery {
+  results: QuestionQuery[];
 }
 
 export interface Question {
@@ -11,14 +19,7 @@ export interface Question {
   choice_answer?: string;
 }
 
-export interface QuestionQuery {
-  type: string;
-  difficulty: string;
-  category: string;
-  question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
-}
+export const NUMBER_OF_QUESTIONS: number = 5;
 
 export const getNumberOfAnswers = (questions: Question[]): number => {
   return questions.reduce(

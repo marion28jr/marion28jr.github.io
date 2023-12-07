@@ -1,13 +1,13 @@
 import { FunctionComponent, useContext } from "react";
-import { QuestionsContext, QuestionsContextType } from "../../utils/context";
-import { Question } from "../../utils/datas";
+import { QuestionsContext, QuestionsContextType } from "../../../shared/utils/context";
+import { Question } from "../../../shared/models/questions";
 
-interface QuestionFormProps {
+interface QuestionItemProps {
   question: Question;
 }
 
-const QuestionForm: FunctionComponent<QuestionFormProps> = (
-  props: QuestionFormProps
+const QuestionItem: FunctionComponent<QuestionItemProps> = (
+  props: QuestionItemProps
 ) => {
   const { question } = props;
   const { questions, setQuestions } =
@@ -45,4 +45,4 @@ const QuestionForm: FunctionComponent<QuestionFormProps> = (
   );
 };
 
-export default QuestionForm;
+export default QuestionItem;
