@@ -1,7 +1,11 @@
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { QuestionsContext, QuestionsContextType } from "../../../utils/context";
-import { Question, getNumberOfAnswers } from "../../../utils/datas";
+import {
+  NUMBER_OF_QUESTIONS,
+  Question,
+  getNumberOfAnswers,
+} from "../../../utils/datas";
 import QuestionForm from "../../forms/QuestionForm";
 import SearchForm from "../../forms/SearchForm";
 
@@ -9,7 +13,7 @@ const PageQuiz = () => {
   const { questions } = useContext<QuestionsContextType>(QuestionsContext);
 
   const showSubmitButton: boolean = useMemo<boolean>(
-    () => getNumberOfAnswers(questions) === 5,
+    () => getNumberOfAnswers(questions) === NUMBER_OF_QUESTIONS,
     [questions]
   );
 

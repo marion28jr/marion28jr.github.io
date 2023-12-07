@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import PageQuiz from "./feature/pages/PageQuiz/PageQuiz";
 import PageResultat from "./feature/pages/PageResultat/PageResultat";
-import { useState } from "react";
 import { QuestionsContext } from "./utils/context";
 import { Question } from "./utils/datas";
 
@@ -10,12 +10,12 @@ function App() {
 
   return (
     <QuestionsContext.Provider value={{ questions, setQuestions }}>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<PageQuiz />}></Route>
           <Route path="/resultat" element={<PageResultat />}></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </QuestionsContext.Provider>
   );
 }

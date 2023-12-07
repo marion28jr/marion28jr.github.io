@@ -3,6 +3,10 @@ export interface Category {
   name: string;
 }
 
+export interface CategoriesQuery {
+  trivia_categories: Category[];
+}
+
 export interface Question {
   id: number;
   wording: string;
@@ -11,7 +15,7 @@ export interface Question {
   choice_answer?: string;
 }
 
-export interface QuestionQuery {
+interface QuestionQuery {
   type: string;
   difficulty: string;
   category: string;
@@ -19,6 +23,12 @@ export interface QuestionQuery {
   correct_answer: string;
   incorrect_answers: string[];
 }
+
+export interface QuestionsQuery {
+    results: QuestionQuery[];
+  }
+
+export const NUMBER_OF_QUESTIONS: number = 5;
 
 export const getNumberOfAnswers = (questions: Question[]): number => {
   return questions.reduce(
