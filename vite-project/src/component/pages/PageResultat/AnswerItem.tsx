@@ -10,23 +10,28 @@ const AnswerItem: FunctionComponent<AnswerItemProps> = (
 ) => {
   const { question } = props;
 
-  const getClassNameButton = (answer: string): string => {
+  const getClassNameColorAnswer = (answer: string): string => {
     if (answer === question.correct_answer) {
-      return "btn-success";
+      return "bg-success text-white";
     } else if (question.choice_answer === answer) {
-      return "btn-danger";
+      return "bg-danger text-white";
     }
-    return "btn-outline-success";
+    return "";
   };
 
   return (
-    <div>
+    <div className="mt-2 mb-4">
       <p dangerouslySetInnerHTML={{ __html: question.wording }} />
-      <div>
+      <div className="row row-cols-auto ms-1">
         {question.answers.map((answer: string, index: number) => (
-          <button className={`btn ${getClassNameButton(answer)}`} key={index}>
+          <div
+            className={`col me-2 px-2 py-1 border border-success rounded ${getClassNameColorAnswer(
+              answer
+            )}`}
+            key={index}
+          >
             {answer}
-          </button>
+          </div>
         ))}
       </div>
     </div>

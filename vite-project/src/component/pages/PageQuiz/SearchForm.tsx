@@ -6,10 +6,17 @@ import {
   useEffect,
   useState,
 } from "react";
-import { QuestionsContext, QuestionsContextType } from "../../../shared/utils/context";
-import { handleFetchResponse } from "../../../shared/utils/fetch";
 import { CategoriesQuery, Category } from "../../../shared/models/categories";
-import { NUMBER_OF_QUESTIONS, QuestionsQuery, convertToQuestions } from "../../../shared/models/questions";
+import {
+  NUMBER_OF_QUESTIONS,
+  QuestionsQuery,
+  convertToQuestions,
+} from "../../../shared/models/questions";
+import {
+  QuestionsContext,
+  QuestionsContextType,
+} from "../../../shared/utils/context";
+import { handleFetchResponse } from "../../../shared/utils/fetch";
 
 const SearchForm: FunctionComponent = () => {
   const { setQuestions } = useContext<QuestionsContextType>(QuestionsContext);
@@ -37,7 +44,7 @@ const SearchForm: FunctionComponent = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    
+
     const categoryQuery = currentIdCategory
       ? `&category=${currentIdCategory}`
       : "";
@@ -57,37 +64,47 @@ const SearchForm: FunctionComponent = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <select
-        id="categorySelect"
-        value={currentIdCategory ?? "default"}
-        onChange={onChangeCategory}
-      >
-        <option value="default" disabled hidden>
-          Select a category
-        </option>
-        {categories.map((category: Category) => (
-          <option key={category.id} value={category.id}>
-            {category.name}
-          </option>
-        ))}
-      </select>
-      <select
-        id="difficultySelect"
-        value={currentLevel ?? "default"}
-        onChange={onChangeLevel}
-      >
-        <option value="default" disabled hidden>
-          Select difficulty
-        </option>
-        {levels.map((level: string) => (
-          <option key={level} value={level}>
-            {level}
-          </option>
-        ))}
-      </select>
-      <button id="createBtn" type="submit">
-        Create
-      </button>
+      <div className="row gx-2">
+        <div className="col-5">
+          <select
+            id="categorySelect"
+            value={currentIdCategory ?? "default"}
+            onChange={onChangeCategory}
+            className="form-select"
+          >
+            <option value="default" disabled hidden>
+              Select a category
+            </option>
+            {categories.map((category: Category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col-5">
+          <select
+            id="difficultySelect"
+            value={currentLevel ?? "default"}
+            onChange={onChangeLevel}
+            className="form-select"
+          >
+            <option value="default" disabled hidden>
+              Select difficulty
+            </option>
+            {levels.map((level: string) => (
+              <option key={level} value={level}>
+                {level}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col-2">
+          <button id="createBtn" type="submit" className="btn btn-outline-dark">
+            Create
+          </button>
+        </div>
+      </div>
     </form>
   );
 };
