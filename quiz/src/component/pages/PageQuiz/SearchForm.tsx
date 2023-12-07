@@ -39,7 +39,7 @@ const SearchForm: FunctionComponent = () => {
 
   /**
    * Permet de changer la catégorie choisie
-   * @param event Événement 
+   * @param event Événement
    */
   const onChangeCategory = (event: ChangeEvent<HTMLSelectElement>): void => {
     setCurrentIdCategory(event.target.value);
@@ -47,7 +47,7 @@ const SearchForm: FunctionComponent = () => {
 
   /**
    * Permet de changer le niveau choisi
-   * @param event Événement 
+   * @param event Événement
    */
   const onChangeLevel = (event: ChangeEvent<HTMLSelectElement>): void => {
     setCurrentLevel(event.target.value);
@@ -60,10 +60,12 @@ const SearchForm: FunctionComponent = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    const categoryQuery = currentIdCategory
+    const categoryQuery: string = currentIdCategory
       ? `&category=${currentIdCategory}`
       : "";
-    const levelQuery = currentLevel ? `&difficulty=${currentLevel}` : "";
+    const levelQuery: string = currentLevel
+      ? `&difficulty=${currentLevel}`
+      : "";
 
     fetch(
       `https://opentdb.com/api.php?amount=${NUMBER_OF_QUESTIONS}${categoryQuery}${levelQuery}&type=multiple`

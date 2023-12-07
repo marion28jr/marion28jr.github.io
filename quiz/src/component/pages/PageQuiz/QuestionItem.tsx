@@ -1,4 +1,4 @@
-import { FunctionComponent, MouseEvent, useContext } from "react";
+import { FunctionComponent, useContext } from "react";
 import { Question } from "../../../shared/models/questions";
 import {
   QuestionsContext,
@@ -21,16 +21,10 @@ const QuestionItem: FunctionComponent<QuestionItemProps> = (
 
   /**
    * Permet d'enregistrer la réponse choisie pour une question
-   * @param event Événement
    * @param idQuestion l'id de la question
    * @param answer la réponse choisie
    */
-  const handleChoiceAnswer = (
-    event: MouseEvent<HTMLButtonElement>,
-    idQuestion: number,
-    answer: string
-  ): void => {
-    event.preventDefault();
+  const handleChoiceAnswer = (idQuestion: number, answer: string): void => {
     setQuestions(
       questions.map((question: Question) => ({
         ...question,
@@ -52,7 +46,8 @@ const QuestionItem: FunctionComponent<QuestionItemProps> = (
                 : "btn-outline-success"
             }`}
             key={index}
-            onClick={(event) => handleChoiceAnswer(event, question.id, answer)}
+            type="button"
+            onClick={() => handleChoiceAnswer(question.id, answer)}
           >
             {answer}
           </button>

@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { FormEvent, useContext, useMemo } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import {
   NUMBER_OF_QUESTIONS,
@@ -31,7 +31,8 @@ const PageQuiz = () => {
   /**
    * Permet la redirection vers la page des résultats
    */
-  const handleSubmitQuiz = (): void => {
+  const handleSubmitQuiz = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
     navigate(PATH_RESULTAT);
   };
 

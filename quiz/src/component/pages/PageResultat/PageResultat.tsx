@@ -65,6 +65,7 @@ const PageResultat = () => {
       </div>
       <div className="col-12">
         <button
+          type="button"
           className="mt-4 btn btn-outline-dark w-100"
           onClick={handleCreateNewQuiz}
         >
