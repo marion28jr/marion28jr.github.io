@@ -1,33 +1,44 @@
-import { FunctionComponent, useMemo } from "react";
-import { Question } from "../../datas/question";
+import { FunctionComponent, useContext } from "react";
+import { QuestionsContext, QuestionsContextType } from "../../utils/context";
+import { Question } from "../../utils/datas";
 
 interface QuestionFormProps {
   question: Question;
-  handleChoiceAnswers: (question: string, answers: string) => void;
 }
 
 const QuestionForm: FunctionComponent<QuestionFormProps> = (
   props: QuestionFormProps
 ) => {
-  const { question, handleChoiceAnswers } = props;
+  const { question } = props;
+  const { questions, setQuestions } =
+    useContext<QuestionsContextType>(QuestionsContext);
 
-  const sortAnswers = (incorrectAnswers: string[], correctAnswer: string) => {
-    const list = [...incorrectAnswers, correctAnswer];
-    list.sort(() => 0.5 - Math.random());
-    return list;
+  const handleChoiceAnswer = (idQuestion: number, answer: string): void => {
+    setQuestions(
+      questions.map((question: Question) => ({
+        ...question,
+        choice_answer:
+          question.id === idQuestion ? answer : question.choice_answer,
+      }))
+    );
   };
-
-  const answers = useMemo(
-    () => sortAnswers(question.incorrect_answers, question.correct_answer),
-    [question]
-  );
 
   return (
     <div>
-      <p dangerouslySetInnerHTML={{ __html: question.question }} />
+      <p dangerouslySetInnerHTML={{ __html: question.wording }} />
       <div>
-        {answers.map((answer: string, index) => (
-          <button className={`btn ${ question.choice_answer === answer ? "btn-success" : "btn-outline-success"}`} key={index} onClick={() => handleChoiceAnswers(question.question,answer)}>{answer}</button>
+        {question.answers.map((answer: string, index: number) => (
+          <button
+            className={`btn ${
+              question.choice_answer === answer
+                ? "btn-success"
+                : "btn-outline-success"
+            }`}
+            key={index}
+            onClick={() => handleChoiceAnswer(question.id, answer)}
+          >
+            {answer}
+          </button>
         ))}
       </div>
     </div>

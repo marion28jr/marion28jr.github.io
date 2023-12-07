@@ -2,26 +2,18 @@ import {
   ChangeEvent,
   FunctionComponent,
   MouseEvent,
+  useContext,
   useEffect,
   useState,
 } from "react";
-import { Category } from "../../datas/category";
+import { QuestionsContext, QuestionsContextType } from "../../utils/context";
+import { Category, QuestionQuery, convertToQuestions } from "../../utils/datas";
+import { handleFetchResponse } from "../../utils/fetch";
 
-interface SearchFormProps {
-  handleSubmit: (
-    event: MouseEvent<HTMLButtonElement>,
-    currentIdCategory?: string,
-    currentLevel?: string
-  ) => void;
-}
-
-const SearchForm: FunctionComponent<SearchFormProps> = (
-  props: SearchFormProps
-) => {
-  const { handleSubmit } = props;
-
+const SearchForm: FunctionComponent = () => {
+  const { setQuestions } = useContext<QuestionsContextType>(QuestionsContext);
   const [categories, setCategories] = useState<Category[]>([]);
-  const levels = ["easy", "medium", "hard"];
+  const levels: string[] = ["easy", "medium", "hard"];
   const [currentIdCategory, setCurrentIdCategory] = useState<string>();
   const [currentLevel, setCurrentLevel] = useState<string>();
 
@@ -31,12 +23,31 @@ const SearchForm: FunctionComponent<SearchFormProps> = (
       .then((data) => setCategories(data.trivia_categories));
   }, []);
 
-  const onChangeCategory = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onChangeCategory = (event: ChangeEvent<HTMLSelectElement>): void => {
     setCurrentIdCategory(event.target.value);
   };
 
-  const onChangeLevel = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onChangeLevel = (event: ChangeEvent<HTMLSelectElement>): void => {
     setCurrentLevel(event.target.value);
+  };
+
+  const handleSubmit = (
+    event: MouseEvent<HTMLButtonElement>,
+    currentIdCategory?: string,
+    currentLevel?: string
+  ): void => {
+    event.preventDefault();
+    fetch(
+      `https://opentdb.com/api.php?amount=5&category=${currentIdCategory}&difficulty=${currentLevel}&type=multiple`
+    )
+      .then(handleFetchResponse)
+      .then((data) => {
+        const questions: QuestionQuery[] = data.results;
+        setQuestions(convertToQuestions(questions));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
