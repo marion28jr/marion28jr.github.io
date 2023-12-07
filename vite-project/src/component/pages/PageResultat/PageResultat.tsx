@@ -1,12 +1,20 @@
 import { useContext, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { QuestionsContext, QuestionsContextType } from "../../../shared/utils/context";
+import { useNavigate } from "react-router-dom";
+import {
+  Question,
+  getNumberOfCorrectAnswers,
+} from "../../../shared/models/questions";
+import {
+  QuestionsContext,
+  QuestionsContextType,
+} from "../../../shared/utils/context";
+import { PATH_HOME } from "../../../shared/utils/path";
 import AnswerItem from "./AnswerItem";
-import { Question, getNumberOfCorrectAnswers } from "../../../shared/models/questions";
 
 const PageResultat = () => {
   const { questions, setQuestions } =
     useContext<QuestionsContextType>(QuestionsContext);
+  const navigate = useNavigate();
 
   const score: number = useMemo<number>(
     () => getNumberOfCorrectAnswers(questions),
@@ -22,18 +30,34 @@ const PageResultat = () => {
     return "bg-success";
   };
 
+  const handleCreateNewQuiz = (): void => {
+    setQuestions([]);
+    navigate(PATH_HOME);
+  };
+
   return (
-    <div className="container">
-      <h1>Résultats</h1>
-      {questions.map((question: Question) => (
-        <AnswerItem key={question.id} question={question} />
-      ))}
-      <p className={getClassNameBg()}>
-        You scored {score} out of {questions.length}
-      </p>
-      <Link className="btn btn-primary" to="/" onClick={() => setQuestions([])}>
-        Create a new quiz
-      </Link>
+    <div className="row justify-content-center">
+      <div className="col-12">
+        <h1 className="mb-4 text-center text-uppercase">Résultats</h1>
+      </div>
+      <div className="col-12">
+        {questions.map((question: Question) => (
+          <AnswerItem key={question.id} question={question} />
+        ))}
+      </div>
+      <div className="col-6">
+        <p className={`p-2 ${getClassNameBg()}`}>
+          You scored {score} out of {questions.length}
+        </p>
+      </div>
+      <div className="col-12">
+        <button
+          className="mt-4 btn btn-outline-dark w-100"
+          onClick={handleCreateNewQuiz}
+        >
+          Create a new quiz
+        </button>
+      </div>
     </div>
   );
 };

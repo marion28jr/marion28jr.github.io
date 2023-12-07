@@ -1,6 +1,9 @@
 import { FunctionComponent, useContext } from "react";
-import { QuestionsContext, QuestionsContextType } from "../../../shared/utils/context";
 import { Question } from "../../../shared/models/questions";
+import {
+  QuestionsContext,
+  QuestionsContextType,
+} from "../../../shared/utils/context";
 
 interface QuestionItemProps {
   question: Question;
@@ -24,12 +27,12 @@ const QuestionItem: FunctionComponent<QuestionItemProps> = (
   };
 
   return (
-    <div>
+    <div className="mt-2 mb-4">
       <p dangerouslySetInnerHTML={{ __html: question.wording }} />
       <div>
         {question.answers.map((answer: string, index: number) => (
           <button
-            className={`btn ${
+            className={`btn me-2 ${
               question.choice_answer === answer
                 ? "btn-success"
                 : "btn-outline-success"
