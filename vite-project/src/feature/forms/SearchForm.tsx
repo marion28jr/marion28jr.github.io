@@ -6,14 +6,14 @@ import {
   useEffect,
   useState,
 } from "react";
-import { QuestionsContext } from "../../utils/context";
+import { QuestionsContext, QuestionsContextType } from "../../utils/context";
 import { Category, QuestionQuery, convertToQuestions } from "../../utils/datas";
 import { handleFetchResponse } from "../../utils/fetch";
 
 const SearchForm: FunctionComponent = () => {
-  const { setQuestions } = useContext(QuestionsContext);
+  const { setQuestions } = useContext<QuestionsContextType>(QuestionsContext);
   const [categories, setCategories] = useState<Category[]>([]);
-  const levels = ["easy", "medium", "hard"];
+  const levels: string[] = ["easy", "medium", "hard"];
   const [currentIdCategory, setCurrentIdCategory] = useState<string>();
   const [currentLevel, setCurrentLevel] = useState<string>();
 

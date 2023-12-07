@@ -1,14 +1,14 @@
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { QuestionsContext } from "../../../utils/context";
+import { QuestionsContext, QuestionsContextType } from "../../../utils/context";
 import { Question, getNumberOfAnswers } from "../../../utils/datas";
 import QuestionForm from "../../forms/QuestionForm";
 import SearchForm from "../../forms/SearchForm";
 
 const PageQuiz = () => {
-  const { questions } = useContext(QuestionsContext);
+  const { questions } = useContext<QuestionsContextType>(QuestionsContext);
 
-  const showSubmitButton = useMemo(
+  const showSubmitButton: boolean = useMemo<boolean>(
     () => getNumberOfAnswers(questions) === 5,
     [questions]
   );

@@ -41,7 +41,7 @@ const sortAnswers = (
   incorrectAnswers: string[],
   correctAnswer: string
 ): string[] => {
-  const list = [...incorrectAnswers, correctAnswer];
+  const list: string[] = [...incorrectAnswers, correctAnswer];
   list.sort(() => 0.5 - Math.random());
   return list;
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Question } from "./datas";
 
-interface QuestionsContextType {
+export interface QuestionsContextType {
   questions: Question[];
   setQuestions: (questions: Question[]) => void;
 }

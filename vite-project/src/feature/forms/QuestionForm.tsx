@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext } from "react";
-import { QuestionsContext } from "../../utils/context";
+import { QuestionsContext, QuestionsContextType } from "../../utils/context";
 import { Question } from "../../utils/datas";
 
 interface QuestionFormProps {
@@ -10,7 +10,8 @@ const QuestionForm: FunctionComponent<QuestionFormProps> = (
   props: QuestionFormProps
 ) => {
   const { question } = props;
-  const { questions, setQuestions } = useContext(QuestionsContext);
+  const { questions, setQuestions } =
+    useContext<QuestionsContextType>(QuestionsContext);
 
   const handleChoiceAnswer = (idQuestion: number, answer: string): void => {
     setQuestions(
