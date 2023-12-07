@@ -1,8 +1,8 @@
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { QuestionsContext, QuestionsContextType } from "../../../utils/context";
-import { Question, getNumberOfCorrectAnswers } from "../../../utils/datas";
-import QuestionCorrection from "../../forms/QuestionCorrection";
+import { QuestionsContext, QuestionsContextType } from "../../../shared/utils/context";
+import AnswerItem from "./AnswerItem";
+import { Question, getNumberOfCorrectAnswers } from "../../../shared/models/questions";
 
 const PageResultat = () => {
   const { questions, setQuestions } =
@@ -26,7 +26,7 @@ const PageResultat = () => {
     <div className="container">
       <h1>Résultats</h1>
       {questions.map((question: Question) => (
-        <QuestionCorrection key={question.id} question={question} />
+        <AnswerItem key={question.id} question={question} />
       ))}
       <p className={getClassNameBg()}>
         You scored {score} out of {questions.length}

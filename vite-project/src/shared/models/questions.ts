@@ -1,20 +1,3 @@
-export interface Category {
-  id: number;
-  name: string;
-}
-
-export interface CategoriesQuery {
-  trivia_categories: Category[];
-}
-
-export interface Question {
-  id: number;
-  wording: string;
-  answers: string[];
-  correct_answer: string;
-  choice_answer?: string;
-}
-
 interface QuestionQuery {
   type: string;
   difficulty: string;
@@ -25,8 +8,16 @@ interface QuestionQuery {
 }
 
 export interface QuestionsQuery {
-    results: QuestionQuery[];
-  }
+  results: QuestionQuery[];
+}
+
+export interface Question {
+  id: number;
+  wording: string;
+  answers: string[];
+  correct_answer: string;
+  choice_answer?: string;
+}
 
 export const NUMBER_OF_QUESTIONS: number = 5;
 

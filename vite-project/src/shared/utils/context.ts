@@ -1,5 +1,5 @@
 import React from "react";
-import { Question } from "./datas";
+import { Question } from "../models/questions";
 
 export interface QuestionsContextType {
   questions: Question[];

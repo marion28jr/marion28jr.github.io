@@ -6,15 +6,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import { QuestionsContext, QuestionsContextType } from "../../utils/context";
-import {
-  CategoriesQuery,
-  Category,
-  NUMBER_OF_QUESTIONS,
-  QuestionsQuery,
-  convertToQuestions,
-} from "../../utils/datas";
-import { handleFetchResponse } from "../../utils/fetch";
+import { QuestionsContext, QuestionsContextType } from "../../../shared/utils/context";
+import { handleFetchResponse } from "../../../shared/utils/fetch";
+import { CategoriesQuery, Category } from "../../../shared/models/categories";
+import { NUMBER_OF_QUESTIONS, QuestionsQuery, convertToQuestions } from "../../../shared/models/questions";
 
 const SearchForm: FunctionComponent = () => {
   const { setQuestions } = useContext<QuestionsContextType>(QuestionsContext);
