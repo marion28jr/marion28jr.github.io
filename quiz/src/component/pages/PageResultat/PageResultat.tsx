@@ -11,16 +11,26 @@ import {
 import { PATH_HOME } from "../../../shared/utils/path";
 import AnswerItem from "./AnswerItem";
 
+/**
+ * Composent qui permet d'afficher la page résultat
+ */
 const PageResultat = () => {
   const { questions, setQuestions } =
     useContext<QuestionsContextType>(QuestionsContext);
   const navigate: NavigateFunction = useNavigate();
 
+  /**
+   * Le nombre de réponses correctes
+   */
   const score: number = useMemo<number>(
     () => getNumberOfCorrectAnswers(questions),
     [questions]
   );
 
+  /**
+   * Permet de définir la couleur du texte en fonction du nombre de réponses correctes
+   * @param answer réponse
+   */
   const getClassNameBg = (): string => {
     if (score < 2) {
       return "bg-danger";
@@ -30,6 +40,9 @@ const PageResultat = () => {
     return "bg-success";
   };
 
+  /**
+   * Permet la redirection vers la page du quiz
+   */
   const handleCreateNewQuiz = (): void => {
     setQuestions([]);
     navigate(PATH_HOME);

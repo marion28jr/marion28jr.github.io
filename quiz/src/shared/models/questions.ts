@@ -21,6 +21,11 @@ export interface Question {
 
 export const NUMBER_OF_QUESTIONS: number = 5;
 
+/**
+ * Permet d'indiquer le nombre de questions répondu
+ * @param questions la listes des questions
+ * @returns le nombre de questions répondu
+ */
 export const getNumberOfAnswers = (questions: Question[]): number => {
   return questions.reduce(
     (accumulator: number, question: Question) =>
@@ -29,6 +34,11 @@ export const getNumberOfAnswers = (questions: Question[]): number => {
   );
 };
 
+/**
+ * Permet d'indiquer le nombre de questions correctes
+ * @param questions la listes des questions
+ * @returns le nombre de questions correctes
+ */
 export const getNumberOfCorrectAnswers = (questions: Question[]): number => {
   return questions.reduce(
     (accumulator: number, question: Question) =>
@@ -38,6 +48,12 @@ export const getNumberOfCorrectAnswers = (questions: Question[]): number => {
   );
 };
 
+/**
+ * Permet trier aléatoirement une liste
+ * @param incorrectAnswers la liste des réponses incorrectes
+ * @param correctAnswer la réponse correcte
+ * @returns la liste des réponses
+ */
 const sortAnswers = (
   incorrectAnswers: string[],
   correctAnswer: string
@@ -47,6 +63,11 @@ const sortAnswers = (
   return list;
 };
 
+/**
+ * Transformer la liste de 'QuestionQuery' en liste de 'Question'
+ * @param questions la liste de 'QuestionQuery'
+ * @returns la liste de 'Question'
+ */
 export const convertToQuestions = (questions: QuestionQuery[]): Question[] => {
   return questions.map((question: QuestionQuery, index: number) => ({
     id: index,

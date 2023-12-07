@@ -16,7 +16,7 @@ function App() {
           <Routes>
             <Route path={PATH_HOME} element={<PageQuiz />}></Route>
             <Route path={PATH_RESULTAT} element={<PageResultat />}></Route>
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<Navigate to={PATH_HOME} />} />
           </Routes>
         </HashRouter>
       </QuestionsContext.Provider>
