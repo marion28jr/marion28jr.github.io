@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useMemo } from "react";
+import { FormEvent, FunctionComponent, useContext, useMemo } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import {
   NUMBER_OF_QUESTIONS,
@@ -16,7 +16,7 @@ import SearchForm from "./SearchForm";
 /**
  * Composent qui permet d'afficher la page pour faire le quiz
  */
-const PageQuiz = () => {
+const PageQuiz: FunctionComponent = () => {
   const { questions } = useContext<QuestionsContextType>(QuestionsContext);
   const navigate: NavigateFunction = useNavigate();
 

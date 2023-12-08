@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { FunctionComponent, useContext, useMemo } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import {
   Question,
@@ -14,7 +14,7 @@ import AnswerItem from "./AnswerItem";
 /**
  * Composent qui permet d'afficher la page résultat
  */
-const PageResultat = () => {
+const PageResultat: FunctionComponent = () => {
   const { questions, setQuestions } =
     useContext<QuestionsContextType>(QuestionsContext);
   const navigate: NavigateFunction = useNavigate();

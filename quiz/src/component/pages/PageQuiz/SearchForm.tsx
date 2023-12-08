@@ -71,9 +71,9 @@ const SearchForm: FunctionComponent = () => {
       `https://opentdb.com/api.php?amount=${NUMBER_OF_QUESTIONS}${categoryQuery}${levelQuery}&type=multiple`
     )
       .then(handleFetchResponse)
-      .then((data: QuestionsQuery) => {
-        setQuestions(convertToQuestions(data.results));
-      })
+      .then((data: QuestionsQuery) =>
+        setQuestions(convertToQuestions(data.results))
+      )
       .catch((error: Error) => {
         console.log(error);
       });
