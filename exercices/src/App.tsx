@@ -1,5 +1,6 @@
 import { useState, type JSX } from "react";
 import LocalStoragePage from "./component/PageLocalStorage/LocalStoragePage";
+import DialogPage from "./component/DialogPage/DialogPage";
 
 interface Tab {
   key: number;
@@ -11,7 +12,7 @@ function App() {
   const [currentTab, setCurrentTab] = useState<number>(1);
   const exercisesTab: Tab[] = [
     { key: 1, title: "Exercise 1", contents: <LocalStoragePage /> },
-    { key: 2, title: "Exercise 2", contents: "todo 2" },
+    { key: 2, title: "Exercise 2", contents: <DialogPage /> },
     { key: 3, title: "Exercise 3", contents: "todo 3" },
   ];
 
