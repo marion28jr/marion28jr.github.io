@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useState, type JSX } from "react";
+import LocalStoragePage from "./component/PageLocalStorage/LocalStoragePage";
 
 interface Tab {
   key: number;
   title: string;
-  contents: string;
+  contents: JSX.Element | string;
 }
 
 function App() {
   const [currentTab, setCurrentTab] = useState<number>(1);
   const exercisesTab: Tab[] = [
-    { key: 1, title: "Exercise 1", contents: "todo 1" },
+    { key: 1, title: "Exercise 1", contents: <LocalStoragePage /> },
     { key: 2, title: "Exercise 2", contents: "todo 2" },
     { key: 3, title: "Exercise 3", contents: "todo 3" },
   ];
