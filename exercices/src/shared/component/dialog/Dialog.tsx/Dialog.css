@@ -1,24 +1,33 @@
-.dialog-content {
-  position: fixed;
-  z-index: 6;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 0.25rem solid var(--bs-border-color);
-  max-width: calc(100% - 2em);
-  max-height: calc(100% - 2em);
-}
-
 .dialog-overlay {
   position: fixed;
   display: block;
+  z-index: 6;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 0.1rem solid var(--bs-border-color);
+  max-width: calc(100% - 2em);
+  max-height: calc(100% - 2em);
+}
+
+.dialog-content-dialog {
   z-index: 5;
+}
+
+.dialog-content-modal {
+  z-index: 7;
+}
+
+.dialog-divider {
+  border-bottom: 0.02rem solid var(--bs-border-color);
 }

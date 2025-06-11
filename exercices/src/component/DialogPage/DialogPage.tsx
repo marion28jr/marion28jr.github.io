@@ -1,5 +1,6 @@
 import type { FC } from "react";
-import ExampleRegularDialog from "./ExampleRegularDialog";
+import ExampleRegularDialog from "./ExampleRegularDialog/ExampleRegularDialog";
+import ExampleModal from "./ExampleModal/ExampleModal";
 
 const DialogPage: FC = () => {
   return (
@@ -9,9 +10,13 @@ const DialogPage: FC = () => {
         with any content
       </h3>
 
-      <div className="my-4">
-        <h4 className="mb-3">Example the regular dialog</h4>
+      <div className="pt-4 pb-3">
+        <h4 className="mb-3">Example with the regular dialog</h4>
         <ExampleRegularDialog />
+      </div>
+      <div className="pt-4 pb-3">
+        <h4 className="mb-3">Example with the modal</h4>
+        <ExampleModal />
       </div>
     </div>
   );
