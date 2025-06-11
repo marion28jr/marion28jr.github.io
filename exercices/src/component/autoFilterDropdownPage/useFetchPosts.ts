@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Post } from "../../shared/service/modal/user";
+import type { Post } from "../../shared/modal/user";
 import { handleFetchResponse } from "../../shared/utils/fetch";
 
 /**
@@ -15,8 +15,10 @@ const useFetchPosts = () => {
   const fetchPostsByUser = (id: string) => {
     fetch(`https://jsonplaceholder.typicode.com/users/${id}/posts`)
       .then(handleFetchResponse)
-      .then((data: Post[]) => setPosts(data))
-      .catch((error: Error) => {
+      .then((data: Post[]) => {
+        setPosts(data);
+      })
+      .catch((error: unknown) => {
         console.log(error);
       });
   };

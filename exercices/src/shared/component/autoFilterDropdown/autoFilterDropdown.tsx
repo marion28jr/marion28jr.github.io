@@ -60,7 +60,7 @@ const AutoFilterDropdown = <T extends object>(
   const autoFilterOptions = useMemo(
     () =>
       options.filter((option: T) =>
-        new RegExp(valueInput ?? "", "i").test(`${option[optionLabel]}`)
+        new RegExp(valueInput ?? "", "i").test(option[optionLabel] as string)
       ),
     [valueInput, options, optionLabel]
   );
@@ -84,7 +84,7 @@ const AutoFilterDropdown = <T extends object>(
   ): void => {
     event.preventDefault();
     valueChange(option);
-    setValueInput(`${option[optionLabel]}`);
+    setValueInput(option[optionLabel] as string);
     setShowOptions(false);
   };
 
@@ -108,16 +108,16 @@ const AutoFilterDropdown = <T extends object>(
         >
           {autoFilterOptions.map((option: T) => (
             <button
-              key={`${option[optionId]}`}
+              key={option[optionId] as string}
               className="autoFilterDropdown-option py-1"
               style={{ width: inputRef.current?.getBoundingClientRect().width }}
-              onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-                onClick(event, option)
-              }
+              onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                onClick(event, option);
+              }}
             >
               <span
                 dangerouslySetInnerHTML={{
-                  __html: `${option[optionLabel]}`.replace(
+                  __html: (option[optionLabel] as string).replace(
                     new RegExp(valueInput ?? "", "gi"),
                     (value: string) => `<strong>${value}</strong>`
                   ),

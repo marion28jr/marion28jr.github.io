@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import LocalStorageUpdateComponent from "./LocalStorageUpdateComponent";
-import LocalStorageGetComponent from "./LocalStorageGetComponent";
-import LocalStorageRemoveComponent from "./LocalStorageRemoveComponent";
+import LocalStorageUpdateComponent from "./localStorageUpdateComponent";
+import LocalStorageGetComponent from "./localStorageGetComponent";
+import LocalStorageRemoveComponent from "./localStorageRemoveComponent";
 
 const LocalStoragePage: FC = () => {
   const name = "name";

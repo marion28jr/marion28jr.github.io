@@ -1,21 +1,22 @@
-import { useState, type JSX } from "react";
-import LocalStoragePage from "./component/PageLocalStorage/LocalStoragePage";
-import DialogPage from "./component/DialogPage/DialogPage";
+import { useState, type FC, type JSX } from "react";
+import LocalStoragePage from "./component/localStoragePage/localStoragePage";
+import DialogPage from "./component/dialogPage/dialogPage";
 import AutoFilterDropdownPage from "./component/autoFilterDropdownPage/autoFilterDropdownPage";
 
 interface Tab {
-  key: number;
+  key: string;
   title: string;
   contents: JSX.Element;
 }
 
-function App() {
-  const [currentTab, setCurrentTab] = useState<number>(1);
-  const exercisesTab: Tab[] = [
-    { key: 1, title: "Exercise 1", contents: <LocalStoragePage /> },
-    { key: 2, title: "Exercise 2", contents: <DialogPage /> },
-    { key: 3, title: "Exercise 3", contents: <AutoFilterDropdownPage /> },
-  ];
+const exercisesTab: Tab[] = [
+  { key: "1", title: "Exercise 1", contents: <LocalStoragePage /> },
+  { key: "2", title: "Exercise 2", contents: <DialogPage /> },
+  { key: "3", title: "Exercise 3", contents: <AutoFilterDropdownPage /> },
+];
+
+const App: FC = () => {
+  const [currentTab, setCurrentTab] = useState<string>("1");
 
   return (
     <div className="container mt-5">
@@ -39,7 +40,9 @@ function App() {
                   role="tab"
                   aria-controls={`nav-ex${exerciseTab.key}`}
                   aria-selected={currentTab === exerciseTab.key}
-                  onClick={() => setCurrentTab(exerciseTab.key)}
+                  onClick={() => {
+                    setCurrentTab(exerciseTab.key);
+                  }}
                 >
                   {exerciseTab.title}
                 </button>
@@ -65,6 +68,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

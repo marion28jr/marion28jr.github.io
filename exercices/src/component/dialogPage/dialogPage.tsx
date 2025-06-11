@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import ExampleRegularDialog from "./ExampleRegularDialog/ExampleRegularDialog";
-import ExampleModal from "./ExampleModal/ExampleModal";
+import ExampleRegularDialog from "./exampleRegularDialog/ExampleRegularDialog";
+import ExampleModal from "./exampleModal/exampleModal";
 
 const DialogPage: FC = () => {
   return (

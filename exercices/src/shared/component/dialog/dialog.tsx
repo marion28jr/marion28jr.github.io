@@ -1,5 +1,5 @@
 import { type FC, type JSX } from "react";
-import "./Dialog.css";
+import "./dialog.css";
 
 interface DialogProps {
   /**
@@ -67,9 +67,9 @@ const Dialog: FC<DialogProps> = (props: DialogProps) => {
     <>
       {visible && (
         <div
-          className={`${
+          className={
             isModal ? "dialog-overlay" : "dialog-content dialog-content-dialog"
-          }`}
+          }
         >
           <div
             className={`py-5 ${
@@ -84,7 +84,9 @@ const Dialog: FC<DialogProps> = (props: DialogProps) => {
                     <button
                       className="btn-close"
                       type="button"
-                      onClick={() => setVisible(false)}
+                      onClick={() => {
+                        setVisible(false);
+                      }}
                     />
                   )}
                 </div>

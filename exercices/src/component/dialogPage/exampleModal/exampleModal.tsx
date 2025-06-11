@@ -1,7 +1,7 @@
 import { useState, type FC } from "react";
-import Dialog from "../../../shared/component/dialog/Dialog.tsx/Dialog";
-import { flowers, type Flower } from "../../../shared/service/modal/flower";
-import "./ExampleModal.css";
+import Dialog from "../../../shared/component/dialog/dialog";
+import { flowers, type Flower } from "../../../shared/modal/flower";
+import "./exampleModal.css";
 /**
  * Ce composant permet de montrer un exemple d'une modale sans intéraction
  */
@@ -15,7 +15,9 @@ const ExampleModal: FC = () => {
         <div className="card-body">
           <button
             className="btn btn-primary"
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              setShowModal(true);
+            }}
           >
             Open modal
           </button>
@@ -49,7 +51,9 @@ const ExampleModal: FC = () => {
                     className="img-sm"
                     src={flower.src}
                     alt={flower.name}
-                    onClick={() => setCurrantFlower(flower)}
+                    onClick={() => {
+                      setCurrantFlower(flower);
+                    }}
                   />
                 </div>
               ))}

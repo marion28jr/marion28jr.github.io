@@ -20,7 +20,12 @@ const LocalStorageRemoveComponent: FC<LocalStorageRemoveComponentPrpos> = ({
           Component to remove the key {`'${keyName}'`}
         </h5>
 
-        <button className="btn btn-primary" onClick={() => removeKey()}>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            removeKey();
+          }}
+        >
           Remove key
         </button>
       </div>
