@@ -1,11 +1,12 @@
 import { useState, type JSX } from "react";
 import LocalStoragePage from "./component/PageLocalStorage/LocalStoragePage";
 import DialogPage from "./component/DialogPage/DialogPage";
+import AutoFilterDropdownPage from "./component/autoFilterDropdownPage/autoFilterDropdownPage";
 
 interface Tab {
   key: number;
   title: string;
-  contents: JSX.Element | string;
+  contents: JSX.Element;
 }
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
   const exercisesTab: Tab[] = [
     { key: 1, title: "Exercise 1", contents: <LocalStoragePage /> },
     { key: 2, title: "Exercise 2", contents: <DialogPage /> },
-    { key: 3, title: "Exercise 3", contents: "todo 3" },
+    { key: 3, title: "Exercise 3", contents: <AutoFilterDropdownPage /> },
   ];
 
   return (
@@ -48,6 +49,7 @@ function App() {
           <div className="tab-content" id="nav-tabContent">
             {exercisesTab.map((exerciseTab: Tab) => (
               <div
+                key={exerciseTab.key}
                 className={`tab-pane fade ${
                   currentTab === exerciseTab.key ? "show active" : ""
                 } mt-2`}

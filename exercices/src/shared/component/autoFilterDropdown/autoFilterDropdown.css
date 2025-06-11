@@ -1,0 +1,23 @@
+.autoFilterDropdown-container {
+  position: fixed;
+  z-index: 2;
+  max-height: 6rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.autoFilterDropdown-input:focus {
+  margin-bottom: 0.25rem;
+}
+
+.autoFilterDropdown-option {
+  background-color: white;
+  padding: 0 0.5rem;
+  text-align: left;
+  border: 0.1rem solid var(--bs-border-color);
+}
+
+.autoFilterDropdown-option:hover {
+  background-color: #f0f0f0;
+}
