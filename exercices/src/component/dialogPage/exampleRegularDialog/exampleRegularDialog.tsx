@@ -46,7 +46,7 @@ const ExampleRegularDialog: FC = () => {
           <div className="pt-3 d-flex align-items-left">
             <button
               className="btn btn-secondary me-2"
-              onClick={() => {
+              onClick={(): void => {
                 setShowRegularDialog(false);
               }}
             >
@@ -55,7 +55,7 @@ const ExampleRegularDialog: FC = () => {
 
             <button
               className="btn btn-primary"
-              onClick={() => {
+              onClick={(): void => {
                 setTeam(undefined);
                 setShowRegularDialog(false);
               }}

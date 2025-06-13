@@ -16,7 +16,7 @@ const ExampleModal: FC = () => {
         <div className="card-body">
           <button
             className="btn btn-primary"
-            onClick={() => {
+            onClick={(): void => {
               setShowModal(true);
             }}
           >
@@ -50,7 +50,7 @@ const ExampleModal: FC = () => {
                     className="img-sm"
                     src={flower.src}
                     alt={flower.name}
-                    onClick={() => {
+                    onClick={(): void => {
                       setCurrantFlower(flower);
                     }}
                   />

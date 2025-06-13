@@ -6,7 +6,7 @@ interface LocalStorageGetComponentPrpos {
 }
 
 /**
- * Ce composent permet d'afficher la valeur de la 'key' dans le LocalStorage
+ * Ce composant permet d'afficher la valeur de la 'key' dans le LocalStorage
  */
 const LocalStorageGetComponent: FC<LocalStorageGetComponentPrpos> = ({
   keyName,

@@ -1,5 +1,5 @@
 .autoFilterDropdown-container {
-  position: fixed;
+  position: absolute;
   z-index: 2;
   max-height: 6rem;
   overflow-y: auto;

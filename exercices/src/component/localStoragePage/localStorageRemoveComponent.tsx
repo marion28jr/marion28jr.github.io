@@ -6,7 +6,7 @@ interface LocalStorageRemoveComponentPrpos {
 }
 
 /**
- * Ce composent permet de supprimer la 'key' dans le LocalStorage
+ * Ce composant permet de supprimer la 'key' dans le LocalStorage
  */
 const LocalStorageRemoveComponent: FC<LocalStorageRemoveComponentPrpos> = ({
   keyName,
@@ -19,7 +19,7 @@ const LocalStorageRemoveComponent: FC<LocalStorageRemoveComponentPrpos> = ({
         <h5 className="card-title">Component to remove the key '{keyName}'</h5>
         <button
           className="btn btn-primary"
-          onClick={() => {
+          onClick={(): void => {
             removeKey();
           }}
         >

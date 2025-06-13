@@ -3,7 +3,7 @@ import ExampleRegularDialog from "./exampleRegularDialog/exampleRegularDialog";
 import ExampleModal from "./exampleModal/exampleModal";
 
 /**
- * Ce composent permet d'afficher l'exercice 2
+ * Ce composant permet d'afficher l'exercice 2
  */
 const DialogPage: FC = () => (
   <div className="mt-4">

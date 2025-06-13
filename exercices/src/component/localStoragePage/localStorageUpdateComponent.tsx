@@ -6,7 +6,7 @@ interface LocalStorageUpdateComponentPrpos {
 }
 
 /**
- * Ce composent permet de mettre à jour la valeur de la 'key' dans le LocalStorage
+ * Ce composant permet de mettre à jour la valeur de la 'key' dans le LocalStorage
  */
 const LocalStorageUpdateComponent: FC<LocalStorageUpdateComponentPrpos> = ({
   keyName,

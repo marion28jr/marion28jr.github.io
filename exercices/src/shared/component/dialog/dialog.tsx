@@ -83,7 +83,7 @@ const Dialog: FC<DialogProps> = (props: DialogProps) => {
                     <button
                       className="btn-close"
                       type="button"
-                      onClick={() => {
+                      onClick={(): void => {
                         setVisible(false);
                       }}
                     />

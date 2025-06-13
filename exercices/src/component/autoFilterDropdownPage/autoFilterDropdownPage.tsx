@@ -4,6 +4,9 @@ import useFetchPosts from "./useFetchPosts";
 import type { Post, User } from "../../shared/modal/user";
 import AutoFilterDropdown from "../../shared/component/autoFilterDropdown/autoFilterDropdown";
 
+/**
+ * Ce composant permet d'afficher l'exercice 3
+ */
 const AutoFilterDropdownPage: FC = () => {
   /**
    * Récupérer la liste des utilisateurs
@@ -23,10 +26,10 @@ const AutoFilterDropdownPage: FC = () => {
   const [currantPost, setCurrantPost] = useState<Post>();
 
   /**
-   * Permet de mettre à jour l'utilisateur selectionné dans la liste
+   * Permet de mettre à jour l'utilisateur selectionné
    * @param user l'utilisateur
    */
-  const userChange = (user?: User) => {
+  const userChange = (user: User): void => {
     setCurrantUser(user);
     setCurrantPost(undefined);
     if (user) {
@@ -35,10 +38,10 @@ const AutoFilterDropdownPage: FC = () => {
   };
 
   /**
-   * Permet de mettre à jour le message selectionné dans la liste
+   * Permet de mettre à jour le message selectionné
    * @param user le message
    */
-  const postChange = (post?: Post) => {
+  const postChange = (post: Post): void => {
     setCurrantPost(post);
   };
 
@@ -53,10 +56,11 @@ const AutoFilterDropdownPage: FC = () => {
           <h4>Select a user and a post</h4>
           <form>
             <div className="mb-3">
-              <label htmlFor="user" className="form-label">
+              <label htmlFor="user-input" className="form-label">
                 User
               </label>
               <AutoFilterDropdown
+                name="user-input"
                 options={users}
                 valueChange={userChange}
                 optionLabel="name"
@@ -66,10 +70,11 @@ const AutoFilterDropdownPage: FC = () => {
             </div>
             {currantUser !== undefined && (
               <div className="mb-3">
-                <label htmlFor="post" className="form-label">
+                <label htmlFor="post-input" className="form-label">
                   Post
                 </label>
                 <AutoFilterDropdown
+                  name="post-input"
                   key={currantUser.id}
                   options={posts}
                   valueChange={postChange}
