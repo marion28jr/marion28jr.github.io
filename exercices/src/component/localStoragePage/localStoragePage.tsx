@@ -5,7 +5,6 @@ import LocalStorageRemoveComponent from "./localStorageRemoveComponent";
 
 /**
  * Ce composent permet d'afficher l'exercice 1
- * @returns
  */
 const LocalStoragePage: FC = () => {
   const name = "name";

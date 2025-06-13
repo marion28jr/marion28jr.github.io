@@ -8,8 +8,7 @@ interface DialogProps {
   visible?: boolean;
   /**
    * Permet d'ouvrir ou fermer la modal
-   * @param visible
-   * @returns
+   * @param visible la visibilité de la modal
    */
   setVisible: (visible: boolean) => void;
   /**
@@ -17,11 +16,11 @@ interface DialogProps {
    */
   isModal?: boolean;
   /**
-   * Inquide si on afficher une croix à la modale
+   * Indique si on affiche une croix à la modale
    */
   close?: boolean;
   /**
-   * Inquide si on afficher une séparateur entre l'en-tête et le corps de la modale
+   * Indique si on affiche un séparateur entre l'en-tête et le corps de la modale
    */
   showDivider?: boolean;
   /**
@@ -39,7 +38,7 @@ interface DialogProps {
 }
 
 /**
- * Generic dialog component
+ * Modale générique
  */
 const Dialog: FC<DialogProps> = (props: DialogProps) => {
   const {
@@ -56,7 +55,7 @@ const Dialog: FC<DialogProps> = (props: DialogProps) => {
   /**
    * Permet de retourner le css du justify-content pour le header
    */
-  const getJustifyHeader = () => {
+  const getJustifyHeader = (): string => {
     if (header && close) {
       return "between";
     }
