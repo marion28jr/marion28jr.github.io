@@ -2,8 +2,9 @@ import { useState, type FC } from "react";
 import Dialog from "../../../shared/component/dialog/dialog";
 import { flowers, type Flower } from "../../../shared/modal/flower";
 import "./exampleModal.css";
+
 /**
- * Ce composant permet de montrer un exemple d'une modale sans intéraction
+ * Ce composant permet de montrer un exemple d'une modale sans interaction
  */
 const ExampleModal: FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -11,11 +12,11 @@ const ExampleModal: FC = () => {
 
   return (
     <div className="mt-4">
-      <div className="card" style={{ height: "100%" }}>
+      <div className="card">
         <div className="card-body">
           <button
             className="btn btn-primary"
-            onClick={() => {
+            onClick={(): void => {
               setShowModal(true);
             }}
           >
@@ -26,10 +27,10 @@ const ExampleModal: FC = () => {
 
       <Dialog
         isModal
+        close
         showDivider
         visible={showModal}
         setVisible={setShowModal}
-        close
         header={
           <h4 className="pb-3">
             <strong>Flowers</strong>
@@ -37,13 +38,11 @@ const ExampleModal: FC = () => {
         }
         body={
           <div>
-            <div>
-              <img
-                className="img-currant"
-                src={currantFlower.src}
-                alt={currantFlower.name}
-              />
-            </div>
+            <img
+              className="img-currant"
+              src={currantFlower.src}
+              alt={currantFlower.name}
+            />
             <div className="row">
               {flowers.map((flower: Flower) => (
                 <div className="col" key={flower.id}>
@@ -51,7 +50,7 @@ const ExampleModal: FC = () => {
                     className="img-sm"
                     src={flower.src}
                     alt={flower.name}
-                    onClick={() => {
+                    onClick={(): void => {
                       setCurrantFlower(flower);
                     }}
                   />

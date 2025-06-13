@@ -2,16 +2,18 @@ import { useState, type FC } from "react";
 import Dialog from "../../../shared/component/dialog/dialog";
 
 /**
- * Ce composant permet de montrer un exemple d'une boite de dialogue avec intéraction
+ * Ce composant permet de montrer un exemple d'une boite de dialogue avec interaction
  */
 const ExampleRegularDialog: FC = () => {
   const [showRegularDialog, setShowRegularDialog] = useState(false);
-  const [team, setTeam] = useState<string | undefined>();
+  const [team, setTeam] = useState<string>();
 
-  const onClick = () => {
+  const onClick = (): void => {
     if (team === undefined) {
+      // Action Add team
       setTeam(`Team ${Math.floor(Math.random() * 10).toString()}`);
     } else {
+      // Action remove team
       setShowRegularDialog(true);
     }
   };
@@ -39,12 +41,12 @@ const ExampleRegularDialog: FC = () => {
       <Dialog
         visible={showRegularDialog}
         setVisible={setShowRegularDialog}
-        body={<h5>Are you sure you want remove team ? </h5>}
+        body={<h5>Are you sure you want remove team ?</h5>}
         footer={
           <div className="pt-3 d-flex align-items-left">
             <button
               className="btn btn-secondary me-2"
-              onClick={() => {
+              onClick={(): void => {
                 setShowRegularDialog(false);
               }}
             >
@@ -53,7 +55,7 @@ const ExampleRegularDialog: FC = () => {
 
             <button
               className="btn btn-primary"
-              onClick={() => {
+              onClick={(): void => {
                 setTeam(undefined);
                 setShowRegularDialog(false);
               }}

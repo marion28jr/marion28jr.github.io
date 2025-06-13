@@ -6,7 +6,7 @@ interface LocalStorageGetComponentPrpos {
 }
 
 /**
- * Ce composat permet d'afficher la valeur de la 'key' dans le LocalStorage
+ * Ce composant permet d'afficher la valeur de la 'key' dans le LocalStorage
  */
 const LocalStorageGetComponent: FC<LocalStorageGetComponentPrpos> = ({
   keyName,
@@ -17,14 +17,14 @@ const LocalStorageGetComponent: FC<LocalStorageGetComponentPrpos> = ({
     <div className="card" style={{ height: "100%" }}>
       <div className="card-body">
         <h5 className="card-title">
-          Component to get the key value {`'${keyName}'`}{" "}
+          Component to get the key value '{keyName}'
         </h5>
         <p>
           {value === "" ? (
             <>The key value '{keyName}' is not defined</>
           ) : (
             <>
-              The key value '{keyName}' is <strong>{value}</strong>{" "}
+              The key value '{keyName}' is <strong>{value}</strong>
             </>
           )}
         </p>

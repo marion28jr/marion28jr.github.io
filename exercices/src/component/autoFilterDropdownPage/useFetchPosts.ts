@@ -12,7 +12,7 @@ const useFetchPosts = () => {
    * Permet de récupérer la liste des message d'un utilisateur
    * @param id l'id de l'utilisateur
    */
-  const fetchPostsByUser = (id: string) => {
+  const fetchPostsByUser = (id: string): void => {
     fetch(`https://jsonplaceholder.typicode.com/users/${id}/posts`)
       .then(handleFetchResponse)
       .then((data: Post[]) => {

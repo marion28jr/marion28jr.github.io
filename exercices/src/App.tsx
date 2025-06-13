@@ -40,7 +40,7 @@ const App: FC = () => {
                   role="tab"
                   aria-controls={`nav-ex${exerciseTab.key}`}
                   aria-selected={currentTab === exerciseTab.key}
-                  onClick={() => {
+                  onClick={(): void => {
                     setCurrentTab(exerciseTab.key);
                   }}
                 >

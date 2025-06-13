@@ -4,10 +4,12 @@ Create 3 different generic APIs and components
 
 ## Install
 
+Node Version : 18.18.0
+
 ```console
 git clone https://github.com/marion28jr/marion28jr.github.io.git
 cd marion28jr.github.io/exercices/
-nmp i
+npm i
 ```
 
 ## Run projet

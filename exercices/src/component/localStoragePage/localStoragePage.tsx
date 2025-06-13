@@ -3,6 +3,9 @@ import LocalStorageUpdateComponent from "./localStorageUpdateComponent";
 import LocalStorageGetComponent from "./localStorageGetComponent";
 import LocalStorageRemoveComponent from "./localStorageRemoveComponent";
 
+/**
+ * Ce composant permet d'afficher l'exercice 1
+ */
 const LocalStoragePage: FC = () => {
   const name = "name";
   const age = "age";

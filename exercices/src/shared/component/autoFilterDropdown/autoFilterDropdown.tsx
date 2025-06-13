@@ -3,7 +3,7 @@ import "./autoFilterDropdown.css";
 
 interface AutoFilterDropdownProps<T extends object> {
   /**
-   * La liste des options de la liste déroulante
+   * Les options de la liste déroulante
    */
   options: T[];
   /**
@@ -19,18 +19,23 @@ interface AutoFilterDropdownProps<T extends object> {
    */
   placeholder?: string;
   /**
-   * Permet de mettre à jour la valeur séléctionnée dans le composent parent
+   * Permet de mettre à jour la valeur sélectionnée dans le composant parent
    */
-  valueChange: (value?: T) => void;
+  valueChange: (value: T) => void;
+  /**
+   * le nom de l'input
+   */
+  name: string;
 }
 
 /**
- * Ce composent permet de faire une liste déroulante avec l'auto compression
+ * Ce composant permet de faire une liste déroulante avec de l'auto-compression
  */
 const AutoFilterDropdown = <T extends object>(
   props: AutoFilterDropdownProps<T>
 ) => {
-  const { options, optionLabel, optionId, placeholder, valueChange } = props;
+  const { options, optionLabel, optionId, placeholder, valueChange, name } =
+    props;
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [valueInput, setValueInput] = useState<string>();
 
@@ -39,7 +44,7 @@ const AutoFilterDropdown = <T extends object>(
   /**
    * Filtre les options en fonction de la saisie
    */
-  const autoFilterOptions = useMemo(
+  const autoFilterOptions = useMemo<T[]>(
     () =>
       options.filter((option: T) =>
         new RegExp(valueInput ?? "", "i").test(option[optionLabel] as string)
@@ -74,12 +79,14 @@ const AutoFilterDropdown = <T extends object>(
     <div>
       <input
         ref={inputRef}
+        id={name}
+        name={name}
         className="form-control autoFilterDropdown-input"
         value={valueInput ?? ""}
         type="text"
         placeholder={placeholder}
         onChange={onChange}
-        onFocus={() => {
+        onFocus={(): void => {
           setShowOptions(true);
         }}
       />
@@ -93,7 +100,7 @@ const AutoFilterDropdown = <T extends object>(
               key={option[optionId] as string}
               className="autoFilterDropdown-option py-1"
               style={{ width: inputRef.current?.getBoundingClientRect().width }}
-              onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+              onClick={(event: React.MouseEvent<HTMLButtonElement>): void => {
                 onClick(event, option);
               }}
             >
