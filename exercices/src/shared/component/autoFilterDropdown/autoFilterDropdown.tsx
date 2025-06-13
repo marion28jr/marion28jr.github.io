@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
+import { useMemo, useRef, useState, type ChangeEvent } from "react";
 import "./autoFilterDropdown.css";
 
 interface AutoFilterDropdownProps<T extends object> {
@@ -22,10 +22,6 @@ interface AutoFilterDropdownProps<T extends object> {
    * Permet de mettre à jour la valeur séléctionnée dans le composent parent
    */
   valueChange: (value?: T) => void;
-  /**
-   * Permet de réinitialiser l'input de saisi et la liste déroulante
-   */
-  reset?: boolean;
 }
 
 /**
@@ -34,25 +30,11 @@ interface AutoFilterDropdownProps<T extends object> {
 const AutoFilterDropdown = <T extends object>(
   props: AutoFilterDropdownProps<T>
 ) => {
-  const {
-    options,
-    optionLabel,
-    optionId,
-    placeholder,
-    valueChange,
-    reset = false,
-  } = props;
+  const { options, optionLabel, optionId, placeholder, valueChange } = props;
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [valueInput, setValueInput] = useState<string>();
 
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (reset) {
-      setValueInput(undefined);
-      setShowOptions(false);
-    }
-  }, [reset]);
 
   /**
    * Filtre les options en fonction de la saisie
@@ -60,7 +42,7 @@ const AutoFilterDropdown = <T extends object>(
   const autoFilterOptions = useMemo(
     () =>
       options.filter((option: T) =>
-        new RegExp(valueInput ?? "", "i").test(`${option[optionLabel]}`)
+        new RegExp(valueInput ?? "", "i").test(option[optionLabel] as string)
       ),
     [valueInput, options, optionLabel]
   );
@@ -84,7 +66,7 @@ const AutoFilterDropdown = <T extends object>(
   ): void => {
     event.preventDefault();
     valueChange(option);
-    setValueInput(`${option[optionLabel]}`);
+    setValueInput(option[optionLabel] as string);
     setShowOptions(false);
   };
 
@@ -108,16 +90,16 @@ const AutoFilterDropdown = <T extends object>(
         >
           {autoFilterOptions.map((option: T) => (
             <button
-              key={`${option[optionId]}`}
+              key={option[optionId] as string}
               className="autoFilterDropdown-option py-1"
               style={{ width: inputRef.current?.getBoundingClientRect().width }}
-              onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-                onClick(event, option)
-              }
+              onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                onClick(event, option);
+              }}
             >
               <span
                 dangerouslySetInnerHTML={{
-                  __html: `${option[optionLabel]}`.replace(
+                  __html: (option[optionLabel] as string).replace(
                     new RegExp(valueInput ?? "", "gi"),
                     (value: string) => `<strong>${value}</strong>`
                   ),

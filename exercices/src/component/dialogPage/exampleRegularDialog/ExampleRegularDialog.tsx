@@ -1,5 +1,5 @@
 import { useState, type FC } from "react";
-import Dialog from "../../../shared/component/dialog/Dialog.tsx/Dialog";
+import Dialog from "../../../shared/component/dialog/dialog";
 
 /**
  * Ce composant permet de montrer un exemple d'une boite de dialogue avec intéraction
@@ -10,7 +10,7 @@ const ExampleRegularDialog: FC = () => {
 
   const onClick = () => {
     if (team === undefined) {
-      setTeam(`Team ${Math.floor(Math.random() * 10)}`);
+      setTeam(`Team ${Math.floor(Math.random() * 10).toString()}`);
     } else {
       setShowRegularDialog(true);
     }

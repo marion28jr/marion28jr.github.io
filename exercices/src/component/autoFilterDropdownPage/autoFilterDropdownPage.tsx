@@ -1,7 +1,7 @@
 import { useState, type FC } from "react";
 import useFetchUsers from "./useFetchUsers";
 import useFetchPosts from "./useFetchPosts";
-import type { Post, User } from "../../shared/service/modal/user";
+import type { Post, User } from "../../shared/modal/user";
 import AutoFilterDropdown from "../../shared/component/autoFilterDropdown/autoFilterDropdown";
 
 const AutoFilterDropdownPage: FC = () => {
@@ -70,8 +70,8 @@ const AutoFilterDropdownPage: FC = () => {
                   Post
                 </label>
                 <AutoFilterDropdown
+                  key={currantUser.id}
                   options={posts}
-                  reset={currantPost === undefined}
                   valueChange={postChange}
                   optionLabel="title"
                   optionId="id"
@@ -86,7 +86,7 @@ const AutoFilterDropdownPage: FC = () => {
           <div className="col-6">
             <h4>Resultat</h4>
             <p>
-              The user selects is <strong>{currantUser?.name}</strong>
+              The user selects is <strong>{currantUser.name}</strong>
             </p>
             <span>
               Post :
