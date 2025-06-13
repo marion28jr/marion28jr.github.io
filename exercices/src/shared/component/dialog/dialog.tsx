@@ -75,7 +75,7 @@ const Dialog: FC<DialogProps> = (props: DialogProps) => {
               isModal ? "dialog-content dialog-content-modal" : ""
             }`}
           >
-            {(header || close) && (
+            {(header !== undefined || close) && (
               <div className="px-4 py-1">
                 <div className={`d-flex justify-content-${getJustifyHeader()}`}>
                   {header}

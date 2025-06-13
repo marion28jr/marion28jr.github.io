@@ -32,9 +32,7 @@ const AutoFilterDropdownPage: FC = () => {
   const userChange = (user: User): void => {
     setCurrantUser(user);
     setCurrantPost(undefined);
-    if (user) {
-      fetchPostsByUser(user.id);
-    }
+    fetchPostsByUser(user.id);
   };
 
   /**
