@@ -11,14 +11,14 @@ const useLocalStorage = (key: string) => {
   /**
    * La valeur de la key
    */
-  const [value, setValue] = useState(() => {
+  const [value, setValue] = useState<string>(() => {
     return window.localStorage.getItem(key) ?? "";
   });
 
   /**
    * Permet de mettre à jour la valeur dans le hook
    */
-  const updateValue = useCallback(() => {
+  const updateValue = useCallback((): void => {
     setValue(window.localStorage.getItem(key) ?? "");
   }, [key]);
 
@@ -26,15 +26,15 @@ const useLocalStorage = (key: string) => {
    * Permet de mettre à jour la valeur dans le localStorage
    * @param newValue la nouvelle valaur
    */
-  const updateStorage = useCallback(
-    (newValue: string) => {
-      localStorage.setItem(key, newValue);
-      window.dispatchEvent(new Event("storage"));
-    },
-    [key]
-  );
+  const updateStorage = (newValue: string): void => {
+    window.localStorage.setItem(key, newValue);
+    window.dispatchEvent(new Event("storage"));
+  };
 
-  const removeKey = () => {
+  /**
+   * Permet de supprimer la valeur et la clé dans le localStorage
+   */
+  const removeKey = (): void => {
     window.localStorage.removeItem(key);
     window.dispatchEvent(new Event("storage"));
   };
