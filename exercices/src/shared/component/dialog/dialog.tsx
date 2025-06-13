@@ -3,12 +3,12 @@ import "./dialog.css";
 
 interface DialogProps {
   /**
-   * La visibilité de la modal
+   * La visibilité de la modale
    */
   visible?: boolean;
   /**
-   * Permet d'ouvrir ou fermer la modal
-   * @param visible la visibilité de la modal
+   * Permet d'ouvrir ou fermer la modale
+   * @param visible la visibilité de la modale
    */
   setVisible: (visible: boolean) => void;
   /**
