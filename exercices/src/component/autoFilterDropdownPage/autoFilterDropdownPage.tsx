@@ -70,8 +70,8 @@ const AutoFilterDropdownPage: FC = () => {
                   Post
                 </label>
                 <AutoFilterDropdown
+                  key={currantUser.id}
                   options={posts}
-                  reset={currantPost === undefined}
                   valueChange={postChange}
                   optionLabel="title"
                   optionId="id"
